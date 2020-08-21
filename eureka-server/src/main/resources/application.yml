@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: spring-cloud-eureka
+eureka:
+  instance:
+    prefer-ip-address: false
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:${server.port}/eureka/
+#    register-with-eureka:  false
+#    fetch-registry: false
+
+---
+spring:
+  profiles: peer1
+server:
+  port: 9010
+eureka:
+  instance:
+    hostname: peer1
+  client:
+    serviceUrl:
+      defaultZone: http://peer2:9011/eureka,http://peer3:9012/eureka
+---
+spring:
+  profiles: peer2
+server:
+  port: 9011
+eureka:
+  instance:
+    hostname: peer2
+  client:
+    serviceUrl:
+      defaultZone: http://peer1:9010/eureka,http://peer3:9012/eureka
+---
+spring:
+  profiles: peer3
+server:
+  port: 9012
+eureka:
+  instance:
+    hostname: peer3
+  client:
+    serviceUrl:
+      defaultZone: http://peer1:9010/eureka,http://peer2:9011/eureka

@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: eurrka-produce
+server:
+  port: 9060
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9010/eureka/,http://localhost:9011/eureka/,http://localhost:9012/eureka/
+
