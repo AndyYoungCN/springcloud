@@ -1,14 +1,25 @@
 package cn.andyoung.springcloud.eurekaclient1.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class DcController {
 
+  @Autowired LoadBalancerClient loadBalancerClient;
+  @Autowired RestTemplate restTemplate;
+
   @RequestMapping("/dc")
   public String dc() {
-    String services = "Services:";
-    return services;
+    ServiceInstance serviceInstance = loadBalancerClient.choose("eureka-produce-hello");
+
+    String url =
+        "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/hello?name=dc";
+    System.out.println(url);
+    return restTemplate.getForObject(url, String.class);
   }
 }

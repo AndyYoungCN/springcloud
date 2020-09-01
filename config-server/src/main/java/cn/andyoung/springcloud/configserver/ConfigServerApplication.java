@@ -1,16 +1,16 @@
-package cn.andyoung.springcloud.eurekaproducer;
+package cn.andyoung.springcloud.configserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.cloud.config.server.EnableConfigServer;
 
-@EnableDiscoveryClient
-@EnableFeignClients
+@EnableConfigServer
 @SpringBootApplication
-public class EurekaProducerApplication {
+@EnableDiscoveryClient
+public class ConfigServerApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(EurekaProducerApplication.class, args);
+    SpringApplication.run(ConfigServerApplication.class, args);
   }
 }
