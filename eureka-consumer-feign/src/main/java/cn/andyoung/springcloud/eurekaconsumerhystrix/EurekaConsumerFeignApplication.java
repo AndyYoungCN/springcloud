@@ -1,15 +1,17 @@
-package cn.andyoung.springcloud.eurekaconsumerfeign;
+package cn.andyoung.springcloud.eurekaconsumerhystrix;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
+@EnableFeignClients
 @EnableDiscoveryClient
 @SpringBootApplication
-public class EurekaConsumerRibbonApplication {
+public class EurekaConsumerFeignApplication {
 
   @Bean
   @LoadBalanced
@@ -18,6 +20,6 @@ public class EurekaConsumerRibbonApplication {
   }
 
   public static void main(String[] args) {
-    SpringApplication.run(EurekaConsumerRibbonApplication.class, args);
+    SpringApplication.run(EurekaConsumerFeignApplication.class, args);
   }
 }

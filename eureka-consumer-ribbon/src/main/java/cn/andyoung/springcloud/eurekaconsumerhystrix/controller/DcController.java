@@ -1,17 +1,17 @@
-package cn.andyoung.springcloud.eurekaconsumerfeign.controller;
+package cn.andyoung.springcloud.eurekaconsumerhystrix.controller;
 
-import cn.andyoung.springcloud.eurekaconsumerfeign.api.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class DcController {
 
-  @Autowired Producer producer;
+  @Autowired RestTemplate restTemplate;
 
   @RequestMapping("/dc")
   public String dc() {
-    return producer.hello("feign");
+    return restTemplate.getForObject("http://eureka-produce-hello/hello?name=dc", String.class);
   }
 }

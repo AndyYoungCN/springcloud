@@ -9,6 +9,13 @@ public class HelloController {
 
   @RequestMapping("/hello")
   public String index(@RequestParam String name) {
-    return "hello " + name + "，this is first messge";
+    return "hello " + name + "，my name is eureka-produce-hello";
+  }
+
+  @RequestMapping("/helloHystrix")
+  public String helloHystrix(@RequestParam String name) throws InterruptedException {
+
+    Thread.sleep(5000L);
+    return "hello " + name + "，my name is eureka-produce-hello";
   }
 }
